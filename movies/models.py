@@ -30,6 +30,7 @@ class Actor(models.Model):
         verbose_name = "Актори і режисери"
         verbose_name_plural = "Актори і режисери"
 
+
 class Genre(models.Model):
     """Жанри"""
     name = models.CharField("Ім'я", max_length=100)
@@ -54,7 +55,7 @@ class Movie(models.Model):
     country = models.CharField("Країна", max_length=30)
     directors = models.ManyToManyField(Actor, verbose_name="режисер", related_name="film_director")
     actors = models.ManyToManyField(Actor, verbose_name="актори", related_name="film_actor")
-    genres = models.ManyToManyField(Ganre, verbose_name="жанри")
+    genres = models.ManyToManyField(Genre, verbose_name="жанри")
     world_premiere = models.DateField("Прем'єра у світі", default=date.today)
     budget = models.PositiveIntegerField("Бюджет", default=0, help_text="сума в гривнях")
     fees_in_usa = models.PositiveIntegerField(
