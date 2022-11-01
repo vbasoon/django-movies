@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 
@@ -83,7 +85,7 @@ class MovieShots(models.Model):
     title = models.CharField("Заголовок", max_length=100)
     description = models.TextField("Опис")
     image = models.ImageField("Зображення", upload_to="movie_shots/")
-    movie = models.ForeignKey(Movie, verbose_name="Фільм", on_delete=models.CASCADE())
+    movie = models.ForeignKey(Movie, verbose_name="Фільм", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -101,22 +103,22 @@ class RatingStar(models.Model):
         return self.value
 
     class Meta:
-        verbose_name = "Звізда рейтинґу"
-        verbose_name_plural = "Звьозди рейтинґу"
+        verbose_name = "Звізда рейтингу"
+        verbose_name_plural = "Звьозди рейтингу"
 
 
 class Rating(models.Model):
-    """Рейтинґ"""
+    """Рейтинг"""
     ip = models.CharField("IP адреса", max_length=15)
     star = models.ForeignKey(RatingStar, on_delete=models.CASCADE, verbose_name="зірка")
-    movie = models.ForeignKey(Movie, on_delete=models.CharField, verbose_name="фільм")
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="фільм")
 
     def __str__(self):
         return f"{self.star} - {self.movie}"
 
     class Meta:
-        verbose_name = "Звізда рейтинґу"
-        verbose_name_plural = "Звьозди рейтинґу"
+        verbose_name = "Рейтинг"
+        verbose_name_plural = "Рейтинги"
 
 
 class Reviews(models.Model):
